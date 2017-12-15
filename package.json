@@ -1,0 +1,25 @@
+{
+  "name": "vue-ssr",
+  "version": "1.0.0",
+  "description": "learn about vue server side render",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xheldon/vue-ssr.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Xheldon/vue-ssr/issues"
+  },
+  "homepage": "https://github.com/Xheldon/vue-ssr#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "vue": "^2.5.11",
+    "vue-server-renderer": "^2.5.11"
+  }
+}
