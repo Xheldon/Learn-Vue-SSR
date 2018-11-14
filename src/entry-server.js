@@ -2,7 +2,7 @@
 
 import { createApp } from './app';
 export default context => {
-    return new Promist((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         const { app, router } = createApp();
         router.push(context.url);
         router.onReady(() => {
@@ -10,6 +10,7 @@ export default context => {
             if (!matchedComponents.length) {
                 return reject({code: 404});
             }
+            // mathedComponents 返回路由匹配的组件实例
             Promise.all(matchedComponents.map((Component) => {
                 if (Component.asyncData) {
                     return Component.asyncData({
@@ -23,7 +24,4 @@ export default context => {
             });
         }, reject);
     });
-
-
-
 }

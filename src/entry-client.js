@@ -21,7 +21,7 @@ router.onReady(() => {
         }
         Promise.all(activated.map(c => {
             if (c.asyncData) {
-                return asyncData({ store, rote: to });
+                return c.asyncData({ store, rote: to });
             }
         })).then(() => {
             next();
