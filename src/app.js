@@ -1,6 +1,6 @@
 // 导出一个 Vue 实例共享给服务端和客户端, 避免状态单例
 import Vue from 'vue';
-import App from './App';
+import App from './App.vue';
 import { createRouter } from './router';
 import { createStore } from './store';
 import { sync } from 'vuex-router-sync';

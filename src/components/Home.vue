@@ -6,11 +6,11 @@
 <script>
     export default {
         asyncData ({ store, route }) {
-            return store.dispatch('fetchItem', route.params.id);
+            return store.dispatch('fetchItem', route.query.id);
         },
         computed: {
             text () {
-                return this.$store.state.text
+                return this.$store.state.items[this.$route.query.id]
             }
         }
     }

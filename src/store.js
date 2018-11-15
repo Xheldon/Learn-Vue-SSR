@@ -2,24 +2,25 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import { getSomething } from './api';
 
-Vue.use(vuex);
+Vue.use(Vuex);
 
 export function createStore() {
     return new Vuex.Store({
         state: {
-            text: ''
+            items: {}
         },
         actions: {
-            fetchItem ({ commit }) {
-                return getSomething('holy shit').then((text) => {
-                    console.log('res', res);
-                    commit('setItem', {text});
+            fetchItem ({ commit }, id) {
+                return getSomething(id).then((text) => {
+                    commit('setItem', {id, text});
+                }, (err) => {
+                    console.log('err5:', err);
                 });
             }
         },
         mutations: {
-            setItem (state, { text }) {
-                Vue.set(state.text, text)
+            setItem (state, { id, text }) {
+                Vue.set(state.items, id, text)
             }
         }
     });

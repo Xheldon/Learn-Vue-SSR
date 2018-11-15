@@ -8,7 +8,7 @@ Vue.use(Router);
 export function createRouter() {
     return new Router({
         mode: 'history',
-        routed: [
+        routes: [
             {path: '/', component: () => import('./components/Home.vue')}
         ]
     });

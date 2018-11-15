@@ -25,7 +25,13 @@ router.onReady(() => {
             }
         })).then(() => {
             next();
-        }).catch(next);
+        }, (err) => {
+            console.log('err3:', err);
+            reject();
+        }).catch((err) => {
+            console.log('err4:', err);
+            reject();
+        });
 
     });
     app.$mount('#app');

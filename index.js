@@ -1,26 +1,27 @@
-console.log('success render!');
 const Vue = require('vue');
 const server = require('express')();
-const renderer = require('vue-server-renderer').createRenderer();
+const { createBundleRenderer } = require('vue-server-renderer');
+
+const template = require('fs').readFileSync('./tpl/index.html', 'utf-8');
+const serverBundle = require('./bundle/vue-ssr-server-bundle.json');
+const clientManifest = require('./bundle/vue-ssr-client-manifest.json');
+
+const renderer = createBundleRenderer(serverBundle, {
+    template,
+    clientManifest
+});
+
 server.get('*', (req, res) => {
-    const app = new Vue({
-        data: {
-            url: req.url
-        },
-        template: `<div>You visited url is: {{ url }}</div>`
-    });
-    renderer.renderToString(app, (err, html) => {
+    const context = {
+        url: req.url
+    };
+    renderer.renderToString(context, (err, html) => {
         if (err) {
-            res.status(500).end('Internal Server Error')
+            console.log(err, err.stack);
+            res.status(500).end('Internal Server Error');
             return
         }
-        res.end(`
-      <!DOCTYPE html>
-      <html lang="en">
-        <head><title>Hello</title></head>
-        <body>${html}</body>
-      </html>
-    `)
+        res.end(html);
     })
 });
 server.listen(8080);

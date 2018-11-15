@@ -3,7 +3,7 @@
 import { createApp } from './app';
 export default context => {
     return new Promise((resolve, reject) => {
-        const { app, router } = createApp();
+        const { app, router, store } = createApp();
         router.push(context.url);
         router.onReady(() => {
             const matchedComponents = router.getMatchedComponents(); // 在 router.js 中配置的 路径: 组件 对应关系, 在这里查询是否匹配
@@ -21,7 +21,13 @@ export default context => {
             })).then(() => {
                 context.state = store.state;
                 resolve(app);
+            }, (err) => {
+                console.log('err:', err, err.stack);
+                reject();
             });
-        }, reject);
+        }, (err) => {
+            console.log('err2:', err);
+            reject();
+        });
     });
 }
